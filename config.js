@@ -7,4 +7,5 @@ module.exports = {
   YOTI_PEM: fs.readFileSync(process.env.YOTI_KEY_FILE_PATH),
   YOTI_DOC_SCAN_API_URL: process.env.YOTI_DOC_SCAN_API_URL,
   YOTI_DOC_SCAN_IFRAME_URL: `${yotiConfig.docScanApi}/web/index.html`,
+  YOTI_APP_BASE_URL: 'http://localhost:3000',
 };

@@ -1,9 +1,16 @@
 <%- include('layout/header'); -%>
+
+</head>
+
+<body class="text-center bg-light">
+
 <div class="container mb-3">
+
+<% if (sessionResult.getResources().getIdDocuments().length > 0) { %>
 
     <div class="row">
         <div class="col">
-            <h1>Get Session Result</h1>
+            <h1>Verification Results</h1>
 
             <table data-qa="session-result" class="table table-striped">
                 <tbody>
@@ -48,28 +55,6 @@
 
             <div class="accordion mt-3" id="checks">
 
-                <% if (sessionResult.getAuthenticityChecks().length > 0) { %>
-                <div class="card" data-qa="authenticity-checks">
-                    <div class="card-header" id="authenticity-checks">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapse-authenticity-checks" aria-expanded="true"
-                                aria-controls="collapse-authenticity-checks">
-                                Authenticity Checks
-                            </button>
-                        </h3>
-                    </div>
-
-                    <div id="collapse-authenticity-checks" aria-labelledby="authenticity-checks">
-                        <div class="card-body">
-                            <% sessionResult.getAuthenticityChecks().forEach(function(check){ %>
-                            <%- include('partials/check', { check }); %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-
                 <% if (sessionResult.getTextDataChecks().length > 0) { %>
                 <div class="card" data-qa="text-data-checks">
                     <div class="card-header" id="text-data-checks">
@@ -93,51 +78,6 @@
                 </div>
                 <% } %>
 
-                <% if (sessionResult.getFaceMatchChecks().length > 0) { %>
-                <div class="card" data-qa="face-match-checks">
-                    <div class="card-header" id="face-match-checks">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapse-face-match-checks" aria-expanded="true"
-                                aria-controls="collapse-face-match-checks">
-                                FaceMatch Checks
-                            </button>
-                        </h3>
-
-                    </div>
-
-                    <div id="collapse-face-match-checks" aria-labelledby="face-match-checks">
-                        <div class="card-body">
-                            <% sessionResult.getFaceMatchChecks().forEach(function(check){ %>
-                            <%- include('partials/check', { check }); %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-
-                <% if (sessionResult.getLivenessChecks().length > 0) { %>
-                <div class="card" data-qa="liveness-checks">
-                    <div class="card-header" id="liveness-checks">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapse-liveness-checks" aria-expanded="true"
-                                aria-controls="collapse-liveness-checks">
-                                Liveness Checks
-                            </button>
-                        </h3>
-
-                    </div>
-
-                    <div id="collapse-liveness-checks" aria-labelledby="liveness-checks">
-                        <div class="card-body">
-                            <% sessionResult.getLivenessChecks().forEach(function(check){ %>
-                            <%- include('partials/check', { check }); %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
             </div>
         </div>
     </div>
@@ -258,14 +198,14 @@
                 <div class="card">
                     <div class="card-header" id="document-pages-<%= docNum %>">
                         <h4 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                            <button class="btn btn-link" type="button" data-toggle="expand"
                                 data-target="#collapse-document-pages-<%= docNum %>" aria-expanded="true"
                                 aria-controls="collapse-document-pages-<%= docNum %>">
                                 Pages
                             </button>
                         </h4>
                     </div>
-                    <div id="collapse-document-pages-<%= docNum %>" class="collapse" aria-labelledby="document-pages-<%= docNum %>">
+                    <div id="collapse-document-pages-<%= docNum %>" class="expand" aria-labelledby="document-pages-<%= docNum %>">
                         <div class="card-body">
                             <div class="card-group">
                                 <% document.getPages().forEach(function(page) { %>
@@ -292,99 +232,12 @@
     <% }); %>
     <% } %>
 
-    <% if (sessionResult.getResources().getZoomLivenessResources().length > 0) { %>
-    <div class="row pt-4">
-        <div class="col">
-            <h2>Zoom Liveness Resources</h2>
-        </div>
-    </div>
+<% } else { %>
 
-    <%
-    let livenessNum = 0;
-    sessionResult.getResources().getZoomLivenessResources().forEach(function(livenessResource){
-        livenessNum++;
-    %>
+    <h1>ID document(s) not provided. Kindly go back.</h1>
+    <button class="mt-3 btn btn-lg btn-primary" onclick="history.back()"> &lt;&#8722; Back</button>
 
-    <div class="row pt-4">
-        <div class="col">
-            <table class="table table-striped table-light">
-                <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td><%= livenessResource.getId() %></td>
-                    </tr>
-                </tbody>
-            </table>
+<% } %>
 
-            <div class="accordion mt-3">
-
-                <% if (livenessResource.getFaceMap()) { %>
-                <div class="card">
-                    <div class="card-header" id="liveness-<%= livenessNum %>-facemap">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapse-liveness-<%= livenessNum %>-facemap" aria-expanded="true"
-                                aria-controls="collapse-liveness-<%= livenessNum %>-facemap">
-                                Face Map
-                            </button>
-                        </h3>
-                    </div>
-                    <div id="collapse-liveness-<%= livenessNum %>-facemap" class="collapse" aria-labelledby="liveness-<%= livenessNum %>-facemap">
-                        <div class="card-body">
-                            <% if (livenessResource.getFaceMap().getMedia()) { %>
-                            <h4>Media</h4>
-                            <table class="table table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>ID</td>
-                                        <td>
-                                            <a href="/media?mediaId=<%= livenessResource.getFaceMap().getMedia().getId() %>&base64=1">
-                                                <%= livenessResource.getFaceMap().getMedia().getId() %>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-
-                <% if (livenessResource.getFrames().length > 0){ %>
-                <div class="card">
-                    <div class="card-header" id="liveness-<%= livenessNum %>-frames">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapse-liveness-<%= livenessNum %>-frames" aria-expanded="true"
-                                aria-controls="collapse-liveness-<%= livenessNum %>-frames">
-                                Frames
-                            </button>
-                        </h3>
-                    </div>
-                    <div id="collapse-liveness-<%= livenessNum %>-frames" class="collapse" aria-labelledby="liveness-<%= livenessNum %>-frames">
-                        <div class="card-group">
-                            <% livenessResource.getFrames().forEach(function(frame) { %>
-                            <% if (frame.getMedia()) { %>
-                            <div class="card">
-                                <img class="card-img-top" src="/media?mediaId=<%= frame.getMedia().getId() %>" />
-                                <div class="card-body">
-                                    <h5 class="card-title">Frame</h5>
-                                </div>
-                            </div>
-                            <% } %>
-                            <% }); %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-
-            </div>
-        </div>
-    </div>
-
-    <% }); %>
-
-    <% } %>
 </div>
 <%- include('layout/footer'); -%>

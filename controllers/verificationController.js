@@ -6,7 +6,7 @@ const {
     RequestedTextExtractionTaskBuilder,
     SdkConfigBuilder,
 } = require('yoti');
-    
+
 async function createSession(req) {
     const docScanClient = new DocScanClient(
         config.YOTI_CLIENT_SDK_ID,
@@ -30,6 +30,8 @@ async function createSession(req) {
                 .withFontColour('#FFFFFF')
                 .withLocale('en-GB')
                 .withPresetIssuingCountry('GBR')
+                .withSuccessUrl(`${config.YOTI_APP_BASE_URL}/success`)
+                .withErrorUrl(`${config.YOTI_APP_BASE_URL}/error`)
                 .build()
         );
 
