@@ -113,7 +113,7 @@
                             </button>
                         </h4>
                     </div>
-                    <div id="collapse-document-fields-<%= docNum %>" class="collapse" aria-labelledby="document-fields-<%= docNum %>">
+                    <div id="collapse-document-fields-<%= docNum %>" class="expand" aria-labelledby="document-fields-<%= docNum %>">
                         <div class="card-body">
                             <% if (document.getDocumentFields().getMedia()) { %>
                             <h5>Media</h5>
@@ -125,6 +125,14 @@
                                             <a
                                                 href="/media?mediaId=<%= document.getDocumentFields().getMedia().getId() %>">
                                                 <%= document.getDocumentFields().getMedia().getId() %>
+                                                <% 
+                                                const mediaId = document.getDocumentFields().getMedia().getId();
+                                                
+                                                fetch('http://localhost:3000/media?mediaId=' + mediaId)
+                                                .then(response => response.json())
+                                                .then(data => console.log(data));                                              
+                                                
+                                                %>
                                             </a>
                                         </td>
                                     </tr>
