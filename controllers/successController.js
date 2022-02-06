@@ -1,7 +1,5 @@
 const config = require('../config');
 
-var fetch = require('node-fetch');
-
 const {
   DocScanClient,
 } = require('yoti');
@@ -12,9 +10,15 @@ module.exports = async (req, res) => {
     config.YOTI_PEM
   );
 
+  const username = req.body.username;
+
   try {
     const sessionResult = await docScanClient.getSession(req.session.DOC_SCAN_SESSION_ID);
-    res.render('success', { sessionResult: sessionResult, fetch: fetch });
+    res.render('success', {
+      sessionResult: sessionResult,
+      username: req.session.USERNAME, 
+      email: req.session.EMAIL,
+    });
   } catch (error) {
     res.render('error', { error });
   }

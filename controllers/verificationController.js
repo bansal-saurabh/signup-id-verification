@@ -55,9 +55,9 @@ async function configureSessionResponse(sessionID) {
 
     const textExtractionConfig = new SandboxDocumentTextDataExtractionTaskBuilder()
         .withDocumentFields({
-            full_name: 'John Doe',
+            full_name: 'Sean Bell',
             nationality: 'GBR',
-            date_of_birth: '1986-06-01',
+            date_of_birth: '1990-01-01',
             document_number: '123456789',
         })
         .build();
@@ -83,6 +83,9 @@ module.exports = async (req, res) => {
 
         req.session.DOC_SCAN_SESSION_ID = session.getSessionId();
         req.session.DOC_SCAN_SESSION_TOKEN = session.getClientSessionToken();
+
+        req.session.USERNAME = req.body.username;
+        req.session.EMAIL = req.body.email;
 
         configureSessionResponse(req.session.DOC_SCAN_SESSION_ID);
 
