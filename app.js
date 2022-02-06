@@ -9,13 +9,13 @@ var logger = require('morgan');
 var cors = require('cors')
 
 
-
 // var indexRouter = require('./routes/index');
 var signupRouter = require('./routes/signup');
 var verificationRouter = require('./routes/verification');
 var successRouter = require('./routes/success');
 
-var mediaController = require('./controllers/mediaController');
+var mediaImageController = require('./controllers/mediaImageController');
+var mediaJsonController = require('./controllers/mediaJsonController');
 
 var app = express();
 
@@ -42,7 +42,8 @@ app.use('/signup', signupRouter);
 app.use('/verification', verificationRouter);
 app.use('/success', successRouter);
 
-app.use('/media', mediaController);
+app.use('/mediaImage', mediaImageController);
+app.use('/mediaJson', mediaJsonController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
