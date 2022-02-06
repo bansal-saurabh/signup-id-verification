@@ -26,6 +26,6 @@ module.exports = async (req, res) => {
             res.status(200).end(buffer);
         }
     } catch (error) {
-        res.render('pages/error', { error });
+        res.render('error', { error });
     }
 };

@@ -7,7 +7,6 @@ const {
     SdkConfigBuilder,
 } = require('yoti');
 
-
 const {
     SandboxDocScanClientBuilder,
     SandboxDocumentTextDataExtractionTaskBuilder,
@@ -15,8 +14,6 @@ const {
     SandboxTaskResultsBuilder,
     SandboxResponseConfigBuilder
 } = require('@getyoti/sdk-sandbox');
-
-
 
 async function createSession(req) {
     const docScanClient = new DocScanClient(
