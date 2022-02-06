@@ -1,0 +1,37 @@
+const config = require('../config');
+
+const {
+    DocScanClient,
+} = require('yoti');
+
+
+module.exports = async (req, res) => {
+    const docScanClient = new DocScanClient(
+        config.YOTI_CLIENT_SDK_ID,
+        config.YOTI_PEM
+    );
+
+    try {
+        const media = await docScanClient.getMediaContent(
+            req.session.DOC_SCAN_SESSION_ID,
+            req.query.mediaId
+        );
+
+        const content = media.getContent();
+        const buffer = content.toBuffer();
+        const jsonData = JSON.parse(buffer);
+
+        res.send('Hello from JSON: ' + jsonData.full_name);
+
+        // const { buffer } = media.getContent();
+
+        // if (buffer.length === 0) {
+        //     res.status(204).end(buffer);
+        // } else {
+        //     res.set('Content-Type', media.getMimeType());
+        //     res.status(200).end(buffer);
+        // }
+    } catch (error) {
+        res.render('error', { error });
+    }
+};

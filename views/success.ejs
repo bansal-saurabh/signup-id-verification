@@ -123,17 +123,13 @@
                                         <td>ID</td>
                                         <td>
                                             <a
-                                                href="/media?mediaId=<%= document.getDocumentFields().getMedia().getId() %>">
+                                                href="/mediaJson?mediaId=<%= document.getDocumentFields().getMedia().getId() %>">
                                                 <%= document.getDocumentFields().getMedia().getId() %>
-                                                <% 
-                                                const mediaId = document.getDocumentFields().getMedia().getId();
-                                                
-                                                fetch('http://localhost:3000/media?mediaId=' + mediaId)
-                                                .then(response => response.json())
-                                                .then(data => console.log(data));                                              
-                                                
-                                                %>
                                             </a>
+                                        </td>
+                                        <td>
+                                            <iframe id="verificationFrame" frameborder="0" width="100%" height="100" allow="camera" src="/mediaJson?mediaId=<%= document.getDocumentFields().getMedia().getId() %>"
+                                                allowfullscreen></iframe>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -174,27 +170,6 @@
                             <% }); %>
                             <% } %>
 
-                            <% if (task.getGeneratedMedia().length > 0) { %>
-                            <h5>Generated Media</h5>
-
-                            <% task.getGeneratedMedia().forEach(function(media) { %>
-                            <table class="table table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td>ID</td>
-                                        <td>
-                                            <a href="/media?mediaId=<%= media.getId() %>"><%= media.getId() %></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Type</td>
-                                        <td><%= media.getType() %></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <% }); %>
-                            <% } %>
-
                             <% }); %>
                         </div>
                     </div>
@@ -219,7 +194,7 @@
                                 <% document.getPages().forEach(function(page) { %>
                                 <% if (page.getMedia()) { %>
                                 <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="/media?mediaId=<%= page.getMedia().getId() %>" />
+                                    <img class="card-img-top" src="/mediaImage?mediaId=<%= page.getMedia().getId() %>" />
                                     <div class="card-body">
                                         <p>Method: <%= page.getCaptureMethod(); %></p>
                                     </div>
