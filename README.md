@@ -1,4 +1,4 @@
-# Sign Up page with Yoti ID verification
+# Sign up page with Yoti ID verification
 
 Integration of Yoti Sandbox API for identity verification with a Sign up workflow for SocialYoti use case.
 
