@@ -2,7 +2,7 @@
 
 Sign up landing page with ID verification using Yoti Sandbox API.
 
-## Running the project locally.
+## Running the project locally
 
 1. Download and install the LTS version of NodeJS.
 2. Clone the git repository and navigate to the project folder.
