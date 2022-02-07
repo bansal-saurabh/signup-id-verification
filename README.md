@@ -1,6 +1,8 @@
-# signup-id-verification
+# Sign Up page with Yoti ID verification
 
-Sign up landing page with ID verification using Yoti Sandbox API.
+Integration of Yoti Sandbox API for identity verification with a Sign up workflow for SocialYoti use case.
+
+<img src="https://user-images.githubusercontent.com/83540410/152726359-f399aae6-b961-42ec-819f-86690327d90d.png" alt="SocialYoti logo" width="250" />
 
 ## Running the project locally
 
