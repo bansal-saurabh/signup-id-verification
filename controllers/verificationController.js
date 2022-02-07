@@ -90,8 +90,6 @@ module.exports = async (req, res) => {
         configureSessionResponse(req.session.DOC_SCAN_SESSION_ID);
 
         res.render('verification', {
-            sessionId: req.session.DOC_SCAN_SESSION_ID,
-            token: req.session.DOC_SCAN_SESSION_TOKEN,
             iframeURL: `${config.YOTI_DOC_SCAN_IFRAME_URL}?sessionID=${req.session.DOC_SCAN_SESSION_ID}&sessionToken=${req.session.DOC_SCAN_SESSION_TOKEN}`,
         });
     } catch (error) {
