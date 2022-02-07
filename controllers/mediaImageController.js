@@ -1,3 +1,8 @@
+/**
+ * Copyright 2022 https://saurabhbansal.me
+ * @author Saurabh Bansal
+ */
+
 const config = require('../config');
 
 const {
